@@ -1,0 +1,333 @@
+You are my senior frontend engineer and UI/UX partner for Task 1 of a timed frontend assessment.
+
+I need to implement the following task:
+
+TASK 1 — ORDER TRACKING SCREEN
+
+Design and implement a modern, professional mobile Order Tracking screen for an e-commerce application.
+
+The current application only displays:
+
+* Processing
+* Shipped
+* Out for Delivery
+* Delivered
+
+Users report that the current status is difficult to understand. Redesign and implement the experience so delivery status is clear at a glance.
+
+REQUIREMENTS
+
+* Clear visual delivery progress/timeline
+* Current order status
+* Estimated delivery date/time
+* Order/product summary
+* Clear way to contact support
+* Appropriate loading/empty/error states where relevant
+* Responsive design for approximately 360–430px mobile width
+* Clean spacing, typography, hierarchy, and visual consistency
+* Meaningful interactions such as:
+
+  * viewing order details
+  * contacting support
+  * reporting a delivery issue
+
+The UI must handle these situations:
+
+1. DELAYED ORDER
+   The estimated delivery time has passed or the order is significantly delayed.
+   Clearly communicate the delay and provide an appropriate next step.
+
+2. DELIVERED BUT NOT RECEIVED
+   The system says the order was delivered, but the customer reports that they did not receive it.
+   Provide an appropriate next step or support action.
+
+3. TRACKING NOT AVAILABLE YET
+   The order exists, but tracking information is not available yet.
+   Avoid an empty or broken-looking screen.
+
+Show how the same product experience adapts to all three states.
+
+TECHNOLOGY
+
+Use the existing project if one already exists.
+
+Preferred stack:
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* lucide-react
+
+Backend integration is not required.
+Use realistic mock/static data.
+
+IMPORTANT TIME CONSTRAINT
+
+This is one of four tasks in a 4-hour assessment.
+
+Do NOT over-engineer this task.
+
+Prioritize:
+
+1. Required functionality
+2. All required states
+3. Mobile responsiveness
+4. Visual hierarchy
+5. Meaningful interactions
+6. Code quality
+7. Accessibility
+8. Optional polish
+
+Avoid unnecessary libraries, complex state management, backend integration, excessive animations, and features that do not directly improve the assessment result.
+
+IMPLEMENTATION APPROACH
+
+First inspect the existing project structure and determine what is already installed.
+
+Do not reinstall packages that are already available.
+
+Use reusable components and a shared order/tracking data model.
+
+A reasonable architecture may include:
+
+src/
+components/
+OrderHeader
+StatusCard
+TrackingTimeline
+ProductSummary
+SupportCard
+OrderDetailsModal
+IssueReportModal
+DemoStateSwitcher
+
+data/
+orders.ts
+
+types/
+order.ts
+
+pages/
+OrderTracking.tsx
+
+Adapt this architecture if the existing project requires something different.
+
+STATE MODEL
+
+Use a typed state model similar to:
+
+type OrderState =
+| "active"
+| "delayed"
+| "delivered_not_received"
+| "tracking_unavailable";
+
+Do not duplicate the entire screen for every state.
+
+The same components should adapt their content and appearance based on the current state.
+
+DEMO / EVALUATION
+
+Because the evaluator needs to inspect the required situations, provide a clean and subtle way to switch between the states.
+
+The evaluator should be able to view:
+
+* Active delivery
+* Delayed
+* Delivered but not received
+* Tracking unavailable
+
+A small demo-state control is acceptable.
+
+It should not dominate the production UI.
+
+INTERACTIONS
+
+Implement realistic frontend-only interactions using mock behavior.
+
+At minimum:
+
+* View order details → modal, drawer, or expandable section
+* Contact support → modal or appropriate support action
+* Report delivery issue → modal/form/confirmation state
+* Demo state switching → changes the displayed order state
+
+The interactions should actually work.
+
+DESIGN
+
+Create a polished, realistic e-commerce experience.
+
+The user should understand within a few seconds:
+
+* What is happening with the order
+* Where the order is in the delivery process
+* When it should arrive
+* What product was ordered
+* What to do if something goes wrong
+
+Make the current status visually prominent.
+
+Clearly differentiate:
+
+* completed steps
+* current step
+* upcoming steps
+* delayed/problem states
+
+Do not rely only on color to communicate status.
+
+RESPONSIVE DESIGN
+
+The primary target is mobile.
+
+Test the layout mentally and visually at:
+
+* 360px
+* 375px
+* 390px
+* 430px
+
+Prevent:
+
+* horizontal scrolling
+* clipped text
+* overlapping elements
+* broken cards
+* unusably small buttons
+* awkward timeline layouts
+
+Use mobile-first responsive styling.
+
+ACCESSIBILITY
+
+Use:
+
+* semantic HTML
+* real buttons for actions
+* accessible labels for icon buttons
+* keyboard-accessible interactions
+* visible focus states
+* meaningful image alt text
+* sufficient contrast
+
+CODE QUALITY
+
+Keep the implementation:
+
+* clean
+* readable
+* maintainable
+* reasonably componentized
+* type-safe
+* free of unnecessary duplication
+
+Do not introduce Redux, Zustand, React Query, Axios, or other unnecessary dependencies.
+
+Do not modify unrelated files.
+
+IMPLEMENTATION PROCESS
+
+Work in practical phases:
+
+PHASE 1 — Inspect
+Inspect the existing project and identify the current structure, dependencies, entry point, and styling setup.
+
+PHASE 2 — Plan
+Determine the minimum components, types, mock data, and state logic required.
+
+PHASE 3 — Build
+Implement the core Order Tracking screen and reusable components.
+
+PHASE 4 — States
+Implement all required order states using the same component system.
+
+PHASE 5 — Interactions
+Implement order details, support, issue reporting, and state switching.
+
+PHASE 6 — Responsive polish
+Fix spacing, typography, sizing, overflow, and mobile layout.
+
+PHASE 7 — Validation
+Check the requirements, build, console errors, and responsive behavior.
+
+Do not stop after planning if the project context is available. Continue through implementation unless I explicitly tell you to stop.
+
+WHEN YOU NEED AN ADDITIONAL PROMPT FROM ME
+
+Do not ask me for unnecessary confirmation.
+
+If the existing project contains enough information to proceed, proceed.
+
+If something genuinely cannot be determined without my input, ask only for that specific information.
+
+Do not create fake AI prompt-history entries.
+
+AI PROMPT HISTORY REQUIREMENT
+
+The assessment requires a file named:
+
+AI_PROMPT_HISTORY.txt
+
+It must contain every prompt I actually send to AI for this assessment, exactly as sent, in chronological order.
+
+Therefore:
+
+* Do not claim that an AI-generated instruction is a user prompt.
+* Do not fabricate previous prompts.
+* Do not rewrite prompts.
+* Do not combine prompts.
+* Do not add unrelated conversation history.
+* Do not automatically put your own responses into AI_PROMPT_HISTORY.txt as if they were prompts.
+* If you provide a suggested follow-up prompt for me to send, clearly label it as a suggested prompt. I will decide whether to send it and will record it only if I actually send it.
+
+FINAL REVIEW
+
+Before considering Task 1 complete, verify:
+
+FUNCTIONALITY
+
+* Active delivery works
+* Delayed order works
+* Delivered but not received works
+* Tracking unavailable works
+* View order details works
+* Contact support works
+* Report delivery issue works
+* Demo state switching works
+
+UI/UX
+
+* Current status is obvious
+* Timeline is understandable
+* Estimated delivery is clear
+* Product summary is clear
+* Exceptional states explain what happened
+* Exceptional states provide an appropriate next step
+* Tracking unavailable does not look broken
+
+RESPONSIVENESS
+
+* 360px
+* 375px
+* 390px
+* 430px
+* No horizontal overflow
+
+QUALITY
+
+* Clean component structure
+* No unnecessary duplication
+* TypeScript is sensible
+* No unused imports
+* No console errors
+* Production build succeeds
+
+When the implementation is complete, give me a concise final review showing:
+
+CRITICAL — must fix
+IMPORTANT — fix if time allows
+OPTIONAL — only if extra time remains
+
+Remember that I have limited time because this is only one of four assessment tasks. Optimize for a strong, complete submission rather than unnecessary perfection.
