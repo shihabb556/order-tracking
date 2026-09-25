@@ -20,23 +20,28 @@ function resolveOrderState(demo: DemoState): OrderState {
 
 export default function OrderTracking() {
   const [demoState, setDemoState] = useState<DemoState>('active')
-  const [loadedState, setLoadedState] = useState<DemoState | null>(null)
+  const [loadKey, setLoadKey] = useState(0)
+  const [resolved, setResolved] = useState<{ key: number; state: DemoState } | null>(
+    null,
+  )
   const [activeModal, setActiveModal] = useState<ActionId | null>(null)
 
   useEffect(() => {
     if (demoState === 'loading') return
-    const timer = window.setTimeout(() => setLoadedState(demoState), LOAD_TIME_MS)
+    const timer = window.setTimeout(
+      () => setResolved({ key: loadKey, state: demoState }),
+      LOAD_TIME_MS,
+    )
     return () => window.clearTimeout(timer)
-  }, [demoState])
+  }, [demoState, loadKey])
 
-  const screen: 'loading' | 'ready' | 'error' =
-    demoState === 'loading'
-      ? 'loading'
-      : loadedState === demoState
-        ? demoState === 'error'
-          ? 'error'
-          : 'ready'
-        : 'loading'
+  const isLoaded = resolved !== null && resolved.key === loadKey && resolved.state === demoState
+
+  const screen: 'loading' | 'ready' | 'error' = isLoaded
+    ? demoState === 'error'
+      ? 'error'
+      : 'ready'
+    : 'loading'
 
   const order = getOrder(resolveOrderState(demoState))
   const activeStateLabel =
@@ -46,8 +51,9 @@ export default function OrderTracking() {
   const handleAction = (action: ActionId) => setActiveModal(action)
 
   const handleDemoChange = (next: DemoState) => {
-    setLoadedState(null)
+    setResolved(null)
     setDemoState(next)
+    setLoadKey((key) => key + 1)
   }
 
   return (
@@ -93,7 +99,7 @@ export default function OrderTracking() {
               onReportIssue={() => setActiveModal('issue')}
             />
 
-            <p className="pb-2 text-center text-xs leading-relaxed text-slate-400">
+            <p className="pb-2 text-center text-xs leading-relaxed text-slate-500">
               Northwind Store · Prototype demo with mock data
             </p>
           </main>

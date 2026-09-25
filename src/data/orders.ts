@@ -243,14 +243,14 @@ const trackingUnavailable: Order = {
     {
       id: 'transit',
       detail: 'Tracking starts here',
-      timestamp: '—',
+      timestamp: null,
       status: 'upcoming',
     },
-    { id: 'out', detail: 'Pending', timestamp: '—', status: 'upcoming' },
+    { id: 'out', detail: 'Pending', timestamp: null, status: 'upcoming' },
     {
       id: 'delivered',
       detail: 'Signature not required',
-      timestamp: '—',
+      timestamp: null,
       status: 'upcoming',
     },
   ]),

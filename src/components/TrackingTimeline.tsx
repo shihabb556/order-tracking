@@ -56,7 +56,14 @@ export default function TrackingTimeline({
         {steps.map((step, index) => {
           const { icon: StepIcon, label } = stepIcons[step.status]
           const isLast = index === steps.length - 1
-          const connectorDone = step.status === 'completed'
+          const next = steps[index + 1]
+          const connectorClass = !next
+            ? ''
+            : next.status === 'problem'
+              ? 'bg-rose-400'
+              : next.status === 'completed' || next.status === 'current'
+                ? 'bg-indigo-600'
+                : 'bg-slate-200'
 
           return (
             <li key={step.id} className="relative flex gap-3 pb-5 last:pb-0">
@@ -65,7 +72,7 @@ export default function TrackingTimeline({
                   aria-hidden="true"
                   className={cn(
                     'absolute left-[15px] top-8 h-[calc(100%-2rem)] w-0.5 rounded-full',
-                    connectorDone ? 'bg-indigo-600' : 'bg-slate-200',
+                    connectorClass,
                   )}
                 />
               ) : null}
@@ -118,7 +125,7 @@ export default function TrackingTimeline({
                   {step.detail}
                 </p>
                 {step.timestamp ? (
-                  <p className="mt-1 text-xs text-slate-400">{step.timestamp}</p>
+                  <p className="mt-1 text-xs text-slate-500">{step.timestamp}</p>
                 ) : null}
                 <span className="sr-only">{label}</span>
               </div>

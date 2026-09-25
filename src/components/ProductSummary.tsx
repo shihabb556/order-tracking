@@ -43,7 +43,7 @@ export default function ProductSummary({
               className="h-14 w-14 shrink-0 rounded-xl border border-slate-100 bg-slate-50 object-cover"
             />
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-semibold text-slate-900">
+              <p className="text-sm font-semibold leading-snug text-slate-900">
                 {item.name}
               </p>
               <p className="truncate text-xs text-slate-500">{item.variant}</p>
